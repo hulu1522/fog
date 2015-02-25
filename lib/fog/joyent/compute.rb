@@ -9,6 +9,8 @@ module Fog
 
       recognizes :joyent_password
       recognizes :joyent_url
+      
+      recognizes :joyent_ssl_verify_peer
 
       recognizes :joyent_keyname
       recognizes :joyent_keyfile
@@ -123,6 +125,11 @@ module Fog
 
           unless @joyent_username
             raise ArgumentError, "options[:joyent_username] required"
+          end
+          
+          # Allow self-signed certificate connections
+          if options[:joyent_ssl_verify_peer].to_s.downcase == 'true'
+            Excon.defaults[:ssl_verify_peer]=true
           end
 
           if options[:joyent_keyname]
