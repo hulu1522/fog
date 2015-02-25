@@ -128,8 +128,8 @@ module Fog
           end
           
           # Allow self-signed certificate connections
-          if options[:joyent_ssl_verify_peer].to_s.downcase == 'true'
-            Excon.defaults[:ssl_verify_peer]=true
+          if options[:joyent_ssl_verify_peer].to_s.downcase == 'false'
+            Excon.defaults[:ssl_verify_peer]=false
           end
 
           if options[:joyent_keyname]
